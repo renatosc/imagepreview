@@ -171,7 +171,7 @@ class ViewController: NSViewController {
     }
     
     override func keyDown(with event: NSEvent) {
-        print(event.keyCode)
+        //print(event.keyCode)
         
         switch event.keyCode {
         case 24: //   key +/=
