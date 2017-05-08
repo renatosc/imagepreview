@@ -22,6 +22,7 @@
 		5BB2076E1EBAF7FD00B12F5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5BB207701EBAF7FD00B12F5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BB207761EBB00FB00B12F5F /* DestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
+		5BCDEB5D1EC054EA00342B11 /* ImagePreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImagePreview.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		5BB207661EBAF7FD00B12F5F /* ImagePreview */ = {
 			isa = PBXGroup;
 			children = (
+				5BCDEB5D1EC054EA00342B11 /* ImagePreview.entitlements */,
 				5BB207671EBAF7FD00B12F5F /* AppDelegate.swift */,
 				5BB207691EBAF7FD00B12F5F /* ViewController.swift */,
 				5BB207761EBB00FB00B12F5F /* DestinationView.swift */,
@@ -98,6 +100,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = BTWV22YMLF;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -252,6 +259,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ImagePreview/ImagePreview.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = BTWV22YMLF;
 				INFOPLIST_FILE = ImagePreview/Info.plist;
@@ -266,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ImagePreview/ImagePreview.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = BTWV22YMLF;
 				INFOPLIST_FILE = ImagePreview/Info.plist;
