@@ -31,11 +31,13 @@ class DestinationView: NSView {
     
     
     // specifying that we want only to accept URL types
-    var acceptableTypes: Set<String> { return [NSURLPboardType] }
+    var acceptableTypes: Set<NSPasteboard.PasteboardType> {
+        return [NSPasteboard.PasteboardType(rawValue: kUTTypeURL as String)]
+    }
     
     func setup() {
         // registering the types that this view will accept for dragging
-        register(forDraggedTypes: Array(acceptableTypes))
+        registerForDraggedTypes(Array(acceptableTypes))
     }
     
     // drawing a blue rectangle around the view when the user is inside the view witht he dragged image
@@ -52,12 +54,12 @@ class DestinationView: NSView {
     
     
     
-    let filteringOptions = [NSPasteboardURLReadingContentsConformToTypesKey:NSImage.imageTypes()]
+    let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: NSImage.imageTypes]
     
     func shouldAllowDrag(_ draggingInfo: NSDraggingInfo) -> Bool {
         
         // getting the current pasteboard session
-        let pasteBoard = draggingInfo.draggingPasteboard()
+        let pasteBoard = draggingInfo.draggingPasteboard
         
         // cehcking if the object being dragged is acceptable for us
         if pasteBoard.canReadObject(forClasses: [NSURL.self], options: filteringOptions) {
@@ -102,10 +104,10 @@ class DestinationView: NSView {
         
         //1.
         isReceivingDrag = false
-        let pasteBoard = draggingInfo.draggingPasteboard()
+        let pasteBoard = draggingInfo.draggingPasteboard
         
         //2.
-        let point = convert(draggingInfo.draggingLocation(), from: nil)
+        let point = convert(draggingInfo.draggingLocation, from: nil)
         //3.
         if let urls = pasteBoard.readObjects(forClasses: [NSURL.self], options:filteringOptions) as? [URL], urls.count > 0 {
             delegate?.processImageURLs(urls, center: point)

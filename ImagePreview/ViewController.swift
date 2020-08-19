@@ -132,7 +132,7 @@ class ViewController: NSViewController {
     
     func resizeWindow() {
         if let window = self.view.window {
-            let screen = NSScreen.main()!
+            let screen = NSScreen.main!
             window.setFrame(screen.visibleFrame, display:true)
         }
     }
@@ -162,7 +162,7 @@ class ViewController: NSViewController {
             NSObject.cancelPreviousPerformRequests(withTarget: self)
         }
     }
-    func showNextImage (){
+    @objc func showNextImage (){
         showImageAtIndex(currIndex+1)
         
     }
@@ -170,7 +170,7 @@ class ViewController: NSViewController {
         showImageAtIndex(currIndex-1)
     }
     
-    override func keyDown(with event: NSEvent) {
+    func keyDown(with event: NSEvent) -> NSEvent? {
         //print(event.keyCode)
         
         switch event.keyCode {
