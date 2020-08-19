@@ -19,7 +19,13 @@ class ViewController: NSViewController {
     var currIndex: Int = 0
     var maxIndex: Int = 0
     
-    var slideShowSpeed = 3.0; // 3 secs as default
+    var slideShowSpeed = 3.0 {
+        didSet {
+            DispatchQueue.main.async {
+                NSApp.dockTile.badgeLabel = String(self.slideShowSpeed)
+            }
+        }
+    }
     var isSlideShowOn = true
     
     
@@ -32,6 +38,8 @@ class ViewController: NSViewController {
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
             return self.keyDown(with: event)
         }
+
+        NSApp.dockTile.badgeLabel = String(self.slideShowSpeed)
     }
     
     
