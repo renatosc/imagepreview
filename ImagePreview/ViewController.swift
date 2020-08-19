@@ -29,9 +29,8 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         DestinationLayer.delegate = self
         
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
-            return $0
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            return self.keyDown(with: event)
         }
     }
     
