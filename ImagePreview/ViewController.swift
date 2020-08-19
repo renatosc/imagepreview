@@ -174,9 +174,9 @@ class ViewController: NSViewController {
         //print(event.keyCode)
         
         switch event.keyCode {
-        case 24: //   key +/=
+        case 27: //   key +/=
             increaseSlideShowSpeed()
-        case 27: // key -/_
+        case 24: // key -/_
             decreaseSlideShowSpeed()
         case 49: // key space
             startStopSlideShow()
@@ -185,13 +185,10 @@ class ViewController: NSViewController {
         case 123: // key left
             showPreviousImage()
         default:
-            print("")
+            return event
         }
-        if event.keyCode == 24 {
-            
-        } else if event.keyCode == 27 {
-            decreaseSlideShowSpeed()
-        }
+
+        return nil
     }
     
 }
