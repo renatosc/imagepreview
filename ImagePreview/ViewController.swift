@@ -19,7 +19,13 @@ class ViewController: NSViewController {
     var currIndex: Int = 0
     var maxIndex: Int = 0
     
-    var slideShowSpeed = 3.0; // 3 secs as default
+    var slideShowSpeed = 3.0 {
+        didSet {
+            DispatchQueue.main.async {
+                NSApp.dockTile.badgeLabel = String(self.slideShowSpeed)
+            }
+        }
+    }
     var isSlideShowOn = true
     
     
@@ -29,10 +35,11 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         DestinationLayer.delegate = self
         
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
-            return $0
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            return self.keyDown(with: event)
         }
+
+        NSApp.dockTile.badgeLabel = String(self.slideShowSpeed)
     }
     
     
@@ -132,7 +139,7 @@ class ViewController: NSViewController {
     
     func resizeWindow() {
         if let window = self.view.window {
-            let screen = NSScreen.main()!
+            let screen = NSScreen.main!
             window.setFrame(screen.visibleFrame, display:true)
         }
     }
@@ -162,7 +169,7 @@ class ViewController: NSViewController {
             NSObject.cancelPreviousPerformRequests(withTarget: self)
         }
     }
-    func showNextImage (){
+    @objc func showNextImage (){
         showImageAtIndex(currIndex+1)
         
     }
@@ -170,13 +177,13 @@ class ViewController: NSViewController {
         showImageAtIndex(currIndex-1)
     }
     
-    override func keyDown(with event: NSEvent) {
+    func keyDown(with event: NSEvent) -> NSEvent? {
         //print(event.keyCode)
         
         switch event.keyCode {
-        case 24: //   key +/=
+        case 27: //   key +/=
             increaseSlideShowSpeed()
-        case 27: // key -/_
+        case 24: // key -/_
             decreaseSlideShowSpeed()
         case 49: // key space
             startStopSlideShow()
@@ -185,13 +192,10 @@ class ViewController: NSViewController {
         case 123: // key left
             showPreviousImage()
         default:
-            print("")
+            return event
         }
-        if event.keyCode == 24 {
-            
-        } else if event.keyCode == 27 {
-            decreaseSlideShowSpeed()
-        }
+
+        return nil
     }
     
 }
